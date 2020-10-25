@@ -11,7 +11,6 @@ function loadCCP() {
     var lastNameField = document.getElementById("lastName");
     var customerNumberField = document.getElementById("customerNumber");
     var numberToDial = document.getElementById("number");
-    var numberToDial = "+34699440094"
 
     window.myCPP = window.myCPP || {};
 
