@@ -10,6 +10,8 @@ function loadCCP() {
     var firstNameField = document.getElementById("firstName");
     var lastNameField = document.getElementById("lastName");
     var customerNumberField = document.getElementById("customerNumber");
+    var numberToDial = document.getElementById("number");
+    var numberToDial = "+34699440094"
 
     window.myCPP = window.myCPP || {};
 
@@ -104,13 +106,23 @@ function loadCCP() {
         });
 
         $("#makeCall").click(() => {
-            makeCall();
+            // alert (document.getElementById("number").value);
+            numberToDial = document.getElementById("number").value;
+            if (numberToDial != "Type your number") {
+                makeCall(numberToDial);
+            } else {
+                alert ("Type a number to dial")
+            }
+            
+            // makeCall("#makeCall".value);
+
         });
 
         $("#ansCall").click(() => {
             acceptContact();
         });
     }
+  
     // We will log in the browsers console any new agent status
     function handleAgentStateChange(agent) {
         console.log('[agent.onStateChange] Agent state changed. New state is ' + agent.newState);
@@ -157,7 +169,7 @@ function loadCCP() {
                 offlineButton.disabled = false;
                 answerButton.disabled = true;
                 readyButton.disabled = true;
-                dropButton.disabled = true;
+                dropButton.disabled = false;
                 attributesDiv.hidden = true;
                 break;
             case 'Offline':
@@ -285,10 +297,10 @@ function loadCCP() {
         attributesDiv.hidden = false;
     }
 
-    function makeCall() {
+    function makeCall(numberToDial) {
         console.log("make call pressed: ")
         var agent = new lily.Agent();
-        var endpoint = connect.Endpoint.byPhoneNumber("+34699440094");
+        var endpoint = connect.Endpoint.byPhoneNumber(numberToDial);
         agent.connect(endpoint , {
             queueARN : "arn:aws:connect:us-east-1:150934812383:instance/3f3ab3c1-c837-4514-aa9b-6a6ae9831ae4/queue/67e5a8c0-e023-4f1e-bd54-6fa3cc98f011",
             success : function(){console.log("Success call!!!!!!")},
@@ -303,5 +315,18 @@ function loadCCP() {
     function setAction() {
         console.log("setAction called")
     }
+    
+
+
 }
 $(document).ready(loadCCP);
+$(document).ready(function(){
+    $('a[href="#sign_up"]').click(function(){
+        alert('Sign new href executed.'); 
+      }); 
+ });
+
+
+
+  
+ 
